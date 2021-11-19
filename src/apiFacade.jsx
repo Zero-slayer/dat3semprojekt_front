@@ -1,5 +1,5 @@
 
-const URL = "http://localhost:8080/skabelon_war_exploded"
+const URL = "When uploading to server"
 
 function handleHttpErrors(response) {
     if (!response.ok) {
