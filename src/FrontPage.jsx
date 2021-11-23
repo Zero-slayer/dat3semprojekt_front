@@ -1,9 +1,13 @@
 import React from 'react';
 import './FrontPage.css';
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+
 export default function FrontPage() {
 
     return (
+        
         <div>
+            
             <h1 id="header">Worldwide COVID-19 cases</h1>
 
             <form>
@@ -32,6 +36,15 @@ export default function FrontPage() {
                 </div>
 
             </form>
+
+            <MapContainer center={[45.4, -75.7]} zoom={12}scrollWheelZoom={false}>
+      <TileLayer
+    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+    attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+      />
+    </MapContainer>
+
+            
 
         </div>
 
