@@ -1,6 +1,6 @@
 import React from 'react';
 import './FrontPage.css';
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import Map from './LeafletMap';
 
 export default function FrontPage() {
 
@@ -15,7 +15,7 @@ export default function FrontPage() {
                     <div class="mb-3">
                         <label for="countryTextInput" class="form-label">Country: </label>
                         <select id="countryTextInput" class="form-select">
-                            <option>Country</option>
+                            <option selected>Country</option>
                         </select>
                     </div>
 
@@ -37,14 +37,9 @@ export default function FrontPage() {
 
             </form>
 
-            <MapContainer center={[45.4, -75.7]} zoom={12}scrollWheelZoom={false}>
-      <TileLayer
-    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-    attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-      />
-    </MapContainer>
-
-            
+            <div id="leafletMap">
+                <Map />
+            </div>
 
         </div>
 
