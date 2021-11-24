@@ -1,9 +1,9 @@
 import React from 'react';
 import './FrontPage.css';
 import Map from './LeafletMap';
+import covidApi from './api/Covid19API';
 
 export default function FrontPage() {
-
     return (
         
         <div>
@@ -11,18 +11,18 @@ export default function FrontPage() {
             <h1 id="header">Worldwide COVID-19 cases</h1>
 
             <form>
-                <div class="container" id="box1">
-                    <div class="mb-3">
-                        <label for="countryTextInput" class="form-label">Country: </label>
-                        <select id="countryTextInput" class="form-select">
-                            <option selected>Country</option>
+                <div className="container" id="box1">
+                    <div className="mb-3">
+                        <label htmlFor="countryTextInput" className="form-label">Country: </label>
+                        <select id="countryTextInput" className="form-select">
+                            <option defaultValue>Country</option>
                         </select>
                     </div>
 
-                    <div class="mb-3">
-                        <label for="filterTextInput" class="form-label">Filter:</label>
-                        <select id="filterTextInput" class="form-select">
-                            <option selected>Filter</option>
+                    <div className="mb-3">
+                        <label htmlFor="filterTextInput" className="form-label">Filter:</label>
+                        <select id="filterTextInput" className="form-select">
+                            <option defaultValue>Filter</option>
                             <option value="1">Confirmed cases</option>
                             <option value="2">Recovered cases</option>
                             <option value="3">Active cases</option>
@@ -31,15 +31,16 @@ export default function FrontPage() {
                     </div>
                 </div>
 
-                <div class="container" id="box2">
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                <div className="container" id="box2">
+                    <button type="submit" className="btn btn-primary">Submit</button>
                 </div>
 
             </form>
 
-            <div id="leafletMap">
+
+            {/* <div id="leafletMap">
                 <Map />
-            </div>
+            </div> */}
 
         </div>
 

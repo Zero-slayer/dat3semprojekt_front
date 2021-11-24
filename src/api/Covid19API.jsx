@@ -1,3 +1,5 @@
+import React from 'react';
+import { useState, useEffect } from 'react';
 
 const URL = 'https://api.covid19api.com/';
 const summaryUrl = URL + 'summary';
@@ -28,16 +30,43 @@ function handleHttpErrors(response) {
     return response.json();
 }
 
+const application_json = () => {
+    var ops = {
+        headers: { 
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        }
+    }
+    return ops;
+
+}
+
 function Covid19API() {
-    const summary = () => {
-        return fetch(summaryUrl)
-        .then(handleHttpErrors)
-        
+    const Summary = () => {
+        const [summaryData, setSummaryData] = useState([]);
+        const getData = async () => {
+            const response = await fetch(summaryUrl, application_json);
+            const json = await response.json();
+            return setSummaryData(json["Global"]["TotalConfirmed"]);};
+
+        useEffect(() => {
+            getData()
+        }, [])
+
+        return (
+                summaryData
+        )
+    }
+    const Test = () => {
+        return "test";
     }
 
+
     return {
-        summary
+        Summary,
+        Test
     }
 }
+
 const api = Covid19API();
 export default api;
