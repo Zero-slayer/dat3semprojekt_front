@@ -1,13 +1,16 @@
 import React from 'react';
+import NavigationBar from './components/NavigationBar'
 import './FrontPage.css';
-import Map from './LeafletMap';
 import covidApi from './api/Covid19API';
+import Map from './components/LeafletMap';
+
 
 export default function FrontPage() {
     return (
         
         <div>
-            
+
+            <NavigationBar/>        
             <h1 id="header">Worldwide COVID-19 cases</h1>
 
             <form>
@@ -35,13 +38,11 @@ export default function FrontPage() {
                     <button type="submit" className="btn btn-primary">Submit</button>
                 </div>
 
+                <div id="leafletMap">
+                    <Map />
+                </div>
+
             </form>
-
-
-            {/* <div id="leafletMap">
-                <Map />
-            </div> */}
-
         </div>
 
     )
