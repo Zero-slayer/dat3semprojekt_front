@@ -1,14 +1,13 @@
 import React from 'react';
 import './FrontPage.css';
 import Map from './LeafletMap';
+import WorldCases from './WorldCases';
 
 export default function FrontPage() {
 
     return (
-        
         <div>
-            
-            <h1 id="header">Worldwide COVID-19 cases</h1>
+            <h1 id="header">Worldwide COVID-19 cases<WorldCases/> </h1>
 
             <form>
                 <div class="container" id="box1">
