@@ -19,7 +19,7 @@ export default function FrontPage() {
         <div>
             <NavigationBar/>        
             <h1 id="header">Worldwide COVID-19 cases</h1>
-
+<div class="container">
             <form className = "float-container">
                 <div className="float-child"> 
                     <div className="container" id="box1">
@@ -53,6 +53,7 @@ export default function FrontPage() {
                 </div>
 
             </form>
+            </div>
         </div>
 
     )
