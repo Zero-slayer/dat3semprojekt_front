@@ -4,10 +4,17 @@ import Map from './LeafletMap';
 import covidApi from './api/Covid19API';
 
 export default function FrontPage() {
+
+    const countries = covidApi.Countries();
+    const renderCountries = [];
+
+    for (let country of countries) {
+        renderCountries.push(<option key={country}>{country}</option>)
+    }
+
     return (
         
         <div>
-            
             <h1 id="header">Worldwide COVID-19 cases</h1>
 
             <form>
@@ -16,6 +23,7 @@ export default function FrontPage() {
                         <label htmlFor="countryTextInput" className="form-label">Country: </label>
                         <select id="countryTextInput" className="form-select">
                             <option defaultValue>Country</option>
+                            {renderCountries}
                         </select>
                     </div>
 
@@ -34,14 +42,7 @@ export default function FrontPage() {
                 <div className="container" id="box2">
                     <button type="submit" className="btn btn-primary">Submit</button>
                 </div>
-
             </form>
-
-
-            {/* <div id="leafletMap">
-                <Map />
-            </div> */}
-
         </div>
 
     )

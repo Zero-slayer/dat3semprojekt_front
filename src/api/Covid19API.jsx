@@ -56,16 +56,41 @@ function Covid19API() {
         return (
                 summaryData
         )
-    }
-    const Test = () => {
-        return "test";
+
     }
 
+    const Countries = () => {
+        const [countriesArray, setCountriesArray] = useState([]);
+        const getData = async () => {
+            const response = await fetch(countriesUrl, application_json);
+            const data = await response.json();
+
+            data.forEach(country => {
+                Object.entries(country).forEach(([key, value]) => {
+                    if (key === "Country") {
+                        // console.log(value);
+                        setCountriesArray(countriesArray => [...countriesArray, value]);
+                    }
+                });
+            });
+
+        }
+
+        useEffect(() => {
+            getData()
+        }, [])
+
+        return (
+            countriesArray
+        )
+
+    }
 
     return {
         Summary,
-        Test
+        Countries
     }
+
 }
 
 const api = Covid19API();
