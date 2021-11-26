@@ -1,12 +1,12 @@
 import React from 'react';
 import NavigationBar from './components/NavigationBar'
 import './FrontPage.css';
-import covidApi from './api/Covid19API';
+import CovidApi from './api/Covid19API';
 import Map from './components/LeafletMap';
 
 
 export default function FrontPage() {
-    const getCountries = covidApi.Countries();
+    const getCountries = CovidApi.Countries();
 
     return (
         
