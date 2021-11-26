@@ -4,24 +4,20 @@ import { useState, useEffect } from 'react';
 const URL = 'https://api.covid19api.com/';
 const summaryUrl = URL + 'summary';
 const countriesUrl = URL + 'countries';
-const dayOneUrl = 'dayone/country/';
+const dayOneUrl = URL + 'dayone/country/';
 const totalUrl = URL + 'total/' + dayOneUrl;
 const liveUrl = URL + 'live/country/';
 
-const day_one_default = slug_country => URL + 'dayone/country/' + slug_country;
+const type_URL = (slug_country, status, type) => {
+    if (status === "none") {
+        return URL + type + "/country/" + slug_country;
+    }
+    return URL + type + "/country/" + slug_country + "/status/" + status;
+}
 
-const day_one_total_default = slug_country => totalUrl + slug_country;
+const default_country = slug_country => URL + 'country/' + slug_country;
 
-const day_one_live_default = slug_country => liveUrl + slug_country;
-
-const day_one_status = (slug_country, _status) => URL + dayOneUrl + slug_country +
-'/status/' + _status;
-
-const day_one_live_status = (slug_country, _status) => URL + dayOneUrl +
-slug_country + '/status/' + _status + '/live'
-
-const day_one_total = (slug_country, _status) => URL + totalUrl +
-slug_country + '/status/' + _status;
+const day_one_default = slug_country => dayOneUrl + slug_country;
 
 function handleHttpErrors(response) {
     if (!response.ok) {
@@ -42,56 +38,90 @@ const application_json = () => {
 }
 
 function Covid19API() {
+    const Default = (slug_country) => {
+        const [json, setJson] = useState();
+        const getData = async () => {
+            const response = await fetch(day_one_default(slug_country), application_json);
+            const json = await response.json();
+            setJson(json);
+        };
+        useEffect(() => {
+            getData()
+        }, [])
+        return (
+            json
+        )
+
+    }
+    const Coordinates = (slug_country) => {
+        const [json, setJson] = useState();
+        const getData = async () => {
+            const response = await fetch(default_country(slug_country), application_json);
+            const json = await response.json();
+            setJson(json);
+        };
+        useEffect(() => {
+            getData()
+        }, [])
+        return (
+            json
+        )
+
+    }
+    const Status = (slug_country, status, type) => {
+        const [json, setJson] = useState();
+        const getData = async () => {
+            const response = await fetch(type_URL(slug_country, status, type), application_json);
+            const json = await response.json();
+            setJson(json);
+        };
+        useEffect(() => {
+            getData()
+        }, [])
+        return (
+            json
+        )
+
+    }
+
     const Summary = () => {
         const [summaryData, setSummaryData] = useState([]);
         const getData = async () => {
             const response = await fetch(summaryUrl, application_json);
             const json = await response.json();
-            return setSummaryData(json["Global"]["TotalConfirmed"]);};
-
+            return setSummaryData(json["Global"]["TotalConfirmed"]);
+        };
         useEffect(() => {
             getData()
         }, [])
-
         return (
-                summaryData
+            summaryData
         )
 
     }
 
     const Countries = () => {
-        const [countriesArray, setCountriesArray] = useState([]);
+        const [json, setJson] = useState();
         const getData = async () => {
             const response = await fetch(countriesUrl, application_json);
-            const data = await response.json();
-
-            data.forEach(country => {
-                Object.entries(country).forEach(([key, value]) => {
-                    if (key === "Country") {
-                        // console.log(value);
-                        setCountriesArray(countriesArray => [...countriesArray, value]);
-                    }
-                });
-            });
-
-        }
-
+            const json = await response.json();
+            setJson(json);
+        };
         useEffect(() => {
             getData()
         }, [])
-
         return (
-            countriesArray
+            json
         )
+    }
+        return {
+            Default,
+            Coordinates,
+            Status,
+            Summary,
+            Countries
+        }
 
     }
-
-    return {
-        Summary,
-        Countries
-    }
-
-}
-
 const api = Covid19API();
 export default api;

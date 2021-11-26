@@ -1,17 +1,34 @@
 import React from 'react';
+import { useState, useEffect } from 'react';
 import NavigationBar from './components/NavigationBar'
 import './FrontPage.css';
-import covidApi from './api/Covid19API';
+import CovidApi from './api/Covid19API';
 import Map from './components/LeafletMap';
 
 
 export default function FrontPage() {
+    const getCountries = CovidApi.Countries();
+    const [state, setState] = useState({
+        slug_country: "none",
+        status: "none",
+        type: "dayone"
+    });
 
-    const countries = covidApi.Countries();
-    const renderCountries = [];
+    const handleChange = event => {
+        const target = event.target;
+        const value = target.type === "checkbox" ? target.checked : target.value;
+        const name = target.name;
 
-    for (let country of countries) {
-        renderCountries.push(<option key={country}>{country}</option>)
+        setState({ ...state, [name]: value });
+    }
+    console.log(state);
+    console.log(CovidApi.Default("south-africa"));
+
+    const handleSubmit = event => {
+        event.preventDefault();
+        if (state.slug_country === "none") return console.log("-1");
+        if (state.status === "none") return console.log(CovidApi.Default(state.slug_country).Country);
+        console.log(CovidApi.Status(state.slug_country, state.status, state.type));
     }
 
     return (
@@ -19,6 +36,7 @@ export default function FrontPage() {
         <div>
             <NavigationBar/>        
             <h1 id="header">Worldwide COVID-19 cases</h1>
+
             <div class="container">
                 <form className = "float-container">
                     <div className="float-child"> 
@@ -46,6 +64,7 @@ export default function FrontPage() {
                         <div className="container" id="box2">
                             <button type="submit" className="btn btn-primary">Submit</button>
                         </div>
+
                     </div>
                 
                     <div className="float-child" id="leafletMap">
