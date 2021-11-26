@@ -1,14 +1,13 @@
 import NavigationBar from "../components/NavigationBar"
 
-export default function About() {
+export default function Placeholder() {
 
     return (
         
         <div>
             <NavigationBar/>      
-            <h1 id="header">About page</h1>
+            <h1 id="header">Placeholder page</h1>
             <div className="container">
-                <a>Hej</a>
             </div>
         </div>
 

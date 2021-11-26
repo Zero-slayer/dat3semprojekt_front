@@ -27,7 +27,6 @@ export default function FrontPage() {
     const handleSubmit = event => {
         event.preventDefault();
         if (state.slug_country === "none") return console.log("-1");
-        if (state.status === "none") return console.log(CovidApi.Default(state.slug_country).Country);
         console.log(CovidApi.Status(state.slug_country, state.status, state.type));
     }
 
@@ -37,26 +36,32 @@ export default function FrontPage() {
             <NavigationBar/>        
             <h1 id="header">Worldwide COVID-19 cases</h1>
 
-            <div class="container">
-                <form className = "float-container">
-                    <div className="float-child"> 
+                <form className = "float-container" onSubmit={handleSubmit}>
+                    <div className="float-child">
                         <div className="container" id="box1">
                             <div className="mb-3">
-                                <label htmlFor="countryTextInput" className="form-label">Country: </label>
-                                <select id="countryTextInput" className="form-select">
-                                    <option defaultValue>Country</option>
-                                    {renderCountries}
+                                <label htmlFor="countryInput" className="form-label">Country: </label>
+                                <select id="countryInput" className="form-select" name="slug_country" onChange={handleChange}>
+                                    <option defaultValue="none" value="none" >None</option>
+                                    {(getCountries === undefined) ? (<option value="none">None</option>) : (getCountries.map(country => {
+                                        return <option value={ country.Slug } key={ country.ISO2 }>{ country.Country }</option>
+                                    }))}
                                 </select>
                             </div>
                 
                             <div className="mb-3">
-                                <label htmlFor="filterTextInput" className="form-label">Filter:</label>
-                                <select id="filterTextInput" className="form-select">
-                                    <option defaultValue>Filter</option>
-                                    <option value="1">Confirmed cases</option>
-                                    <option value="2">Recovered cases</option>
-                                    <option value="3">Active cases</option>
-                                    <option value="4">Deaths</option>
+                                <label htmlFor="filterInput" className="form-label">Status:</label>
+                                <select id="filterInput" className="form-select" name="status" onChange={handleChange}>
+                                    <option defaultValue value="none">None</option>
+                                    <option value="confirmed">Confirmed cases</option>
+                                    <option value="recovered">Recovered cases</option>
+                                    <option value="active">Active cases</option>
+                                    <option value="deaths">Deaths</option>
+                                </select>
+                                <select id="typeInput" className="form-select filter" name="type" onChange={handleChange}>
+                                    <option defaultValue value="dayone">Day one cases</option>
+                                    <option value="total">Total cases</option>
+                                    <option value="live">Live cases</option>
                                 </select>
                             </div>
                         </div>
@@ -72,7 +77,6 @@ export default function FrontPage() {
                     </div>
 
                 </form>
-            </div>
         </div>
 
     )
