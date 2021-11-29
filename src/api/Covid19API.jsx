@@ -39,7 +39,7 @@ const application_json = () => {
 
 function Covid19API() {
     const Default = (slug_country) => {
-        const [json, setJson] = useState();
+        const [json, setJson] = useState([]);
         const getData = async () => {
             const response = await fetch(day_one_default(slug_country), application_json);
             const json = await response.json();
@@ -54,7 +54,7 @@ function Covid19API() {
 
     }
     const Coordinates = (slug_country) => {
-        const [json, setJson] = useState();
+        const [json, setJson] = useState([]);
         const getData = async () => {
             const response = await fetch(default_country(slug_country), application_json);
             const json = await response.json();
@@ -63,13 +63,14 @@ function Covid19API() {
         useEffect(() => {
             getData()
         }, [])
-        return (
-            json
-        )
+        return [ 
+            json[0].Lat,
+            json[0].Lon
+        ]
 
     }
     const Status = (slug_country, status, type) => {
-        const [json, setJson] = useState();
+        const [json, setJson] = useState([]);
         const getData = async () => {
             const response = await fetch(type_URL(slug_country, status, type), application_json);
             const json = await response.json();
@@ -101,7 +102,7 @@ function Covid19API() {
     }
 
     const Countries = () => {
-        const [json, setJson] = useState();
+        const [json, setJson] = useState([]);
         const getData = async () => {
             const response = await fetch(countriesUrl, application_json);
             const json = await response.json();

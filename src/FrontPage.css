@@ -6,13 +6,18 @@ h1#header{
 }
 
 label.form-label{
+    color: #FFFFFF;
     font-weight: bold;
 }
 
 .container{
     width: 1300px;
-    height: 190px;
+    height: 250px;
     padding: 35px 15px 5px;
+}
+
+#countryInput, #filterInput, #typeInput {
+    width: 400px;
 }
 
 .container::before,
@@ -36,6 +41,7 @@ label.form-label{
     margin-right: 30px;
 }
 .leaflet-container {
+    border: #fff;
     width: 700px;
     height: 500px;
     margin-left: auto;
@@ -46,7 +52,7 @@ label.form-label{
 }
 
 .float-container {
-    border: 3px solid #fff;
+    /* border: 3px solid #fff; */
     padding: 20px;
   }
   
