@@ -59,8 +59,12 @@ label.form-label{
     float: left;
     padding: 20px;
     border: 2px;
-  }
-  
+}
+
+.graph {
+    background-color: #fff;
+}
+
 /* .form-container {
     width: 800px;
 } */

@@ -4,9 +4,9 @@ import NavigationBar from './components/NavigationBar'
 import './FrontPage.css';
 import CovidApi from './api/Covid19API';
 import Map from './components/LeafletMap';
-import Line from './OverTimeGraph'
 import "@progress/kendo-theme-material/dist/all.css";
 import "hammerjs";
+import Line from './OverTimeGraph'
 
 
 export default function FrontPage() {
@@ -81,14 +81,9 @@ export default function FrontPage() {
                 </div>
 
             </form>
-            
-            <div className="App">
-                <div className="container">
-                    <div className="section">
-                        <Line/>
-                    </div>
+                <div className="section" className="graph">
+                    <Line/>
                 </div>
-            </div>
         </div>
 
     )

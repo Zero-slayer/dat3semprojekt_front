@@ -1,5 +1,3 @@
-import * as React from "react";
-import * as ReactDOM from "react-dom";
 import {
     Chart,
     ChartTitle,
@@ -8,26 +6,47 @@ import {
     ChartCategoryAxis,
     ChartCategoryAxisItem,
 } from "@progress/kendo-react-charts";
-import "hammerjs";
-const categories = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"];
 
-const ChartContainer = () => (
-    <Chart>
-        <ChartTitle text="Units sold" />
-        <ChartCategoryAxis>
-            <ChartCategoryAxisItem
-                title={{
-                    text: "Months",
-                }}
-                categories={categories}
-            />
-        </ChartCategoryAxis>
-        <ChartSeries>
-            <ChartSeriesItem type="line" data={[123, 276, 310, 212, 240, 156, 98]} />
-            <ChartSeriesItem type="line" data={[165, 210, 287, 144, 190, 167, 212]} />
-            <ChartSeriesItem type="line" data={[56, 140, 195, 46, 123, 78, 95]} />
-        </ChartSeries>
-    </Chart>
-);
+export const series = [
+    {
+        name: "Total",
+        data: [0, 500, 10000],
+    },    {
+        name: "New",
+        data: [0, 5000, 8000],
+    },    {
+        name: "Recovered",
+        data: [1000, 50, 5000],
+    }
+]
 
-ReactDOM.render(<ChartContainer />, document.querySelector("my-app"));
+const categories = ["day1", "day2", "day3"];
+
+function Line() {
+    return (
+        <Chart>
+            <ChartTitle text="Cases per Day" />
+            <ChartCategoryAxis>
+                <ChartCategoryAxisItem
+                    title={{
+                        text: "Days",
+                    }}
+                    categories={categories}
+                />
+            </ChartCategoryAxis>
+            <ChartSeries>
+                {series.map((item, index) => (
+                    <ChartSeriesItem
+                        key = {index}
+                        type = "line"
+                        tooltip = {{ visible: true }}
+                        data = {item.data}
+                        name = {item.name}
+                    />
+                ))}
+            </ChartSeries>
+        </Chart>
+    )
+};
+
+export default Line;
