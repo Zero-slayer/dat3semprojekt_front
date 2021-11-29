@@ -7,13 +7,21 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+body, html {
+  background-color: #101820FF;
+}
+
+h1 {
+  color: #FFFFFFFF;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
 
 .float-container {
-  border: 3px solid #fff;
+  /* border: 3px solid #fff; */
   padding: 20px;
 }
 
