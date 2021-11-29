@@ -5,8 +5,8 @@ import './FrontPage.css';
 import CovidApi from './api/Covid19API';
 import Map from './components/LeafletMap';
 import Line from './OverTimeGraph'
-import "hammerjs";
 import "@progress/kendo-theme-material/dist/all.css";
+import "hammerjs";
 
 
 export default function FrontPage() {

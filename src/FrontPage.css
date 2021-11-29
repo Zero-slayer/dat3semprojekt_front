@@ -12,6 +12,7 @@ label.form-label{
     height: 190px;
     background-color: #5cbbf2;
     padding: 35px 15px 5px;
+    max-width: 1080px;
     margin: 0 auto;
 }
 
