@@ -80,7 +80,7 @@ export default function FrontPage() {
                         <Map center={coords} zoom="12"/>
                     </div>
             </form>
-                <div className="section" className="graph">
+                <div className="section">
                     <Line/>
                 </div>
             </div>
