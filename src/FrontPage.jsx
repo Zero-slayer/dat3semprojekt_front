@@ -31,7 +31,6 @@ export default function FrontPage() {
         if (state.slug_country === "none") return console.log("-1");
         console.log(CovidApi.Status(state.slug_country, state.status, state.type));
     }
-
     return (
         
         <div>
@@ -79,9 +78,9 @@ export default function FrontPage() {
                     <div className="float-child" id="leafletMap">
                         <Map center={coords} zoom="12"/>
                     </div>
-            </form>
+                </form>
                 <div className="section">
-                    <Line/>
+                    {(state.slug_country === "none") ? <Line country="united-sates"/> : <Line country={state.slug_country}/> }
                 </div>
             </div>
         </div>
