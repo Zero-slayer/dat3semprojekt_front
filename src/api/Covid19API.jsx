@@ -120,7 +120,7 @@ function Covid19API() {
 
         useEffect(() => {
             GetData();
-        }, [])
+        }, [country])
 
         return ReturnArrays();
         

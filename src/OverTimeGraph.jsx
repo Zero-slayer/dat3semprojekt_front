@@ -12,10 +12,10 @@ import CovidApi from './api/Covid19API';
 
 export default function Line({country}) {
 
-    const confirmedData = CovidApi.Chart(country, "Confirmed")
-    const recoveredData = CovidApi.Chart(country, "Recovered")
-    const deathsData = CovidApi.Chart(country, "Deaths")
-    const activeData = CovidApi.Chart(country, "Active")
+    let confirmedData = CovidApi.Chart(country, "Confirmed")
+    let recoveredData = CovidApi.Chart(country, "Recovered")
+    let deathsData = CovidApi.Chart(country, "Deaths")
+    let activeData = CovidApi.Chart(country, "Active")
 
     const series = [
         {

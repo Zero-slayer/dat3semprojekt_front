@@ -80,8 +80,7 @@ export default function FrontPage() {
                     </div>
                 </form>
                 <div className="section">
-                    {console.log(state.slug_country)}
-                    {(state.slug_country === "none") ? <Line country="united-states"/> : <Line country={state.slug_country}/> }
+                    <Line country={state.slug_country === "none" ? "united-states" : state.slug_country}/>
                 </div>
             </div>
         </div>
