@@ -76,7 +76,7 @@ export default function FrontPage() {
                     </div>
                 
                     <div className="float-child" id="leafletMap">
-                        <Map center={coords} zoom="12"/>
+                        <Map country={state.slug_country === "none" ? "united-states" : state.slug_country}/>
                     </div>
                 </form>
                 <div className="section">

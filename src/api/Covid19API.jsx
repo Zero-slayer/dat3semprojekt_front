@@ -13,7 +13,7 @@ const type_URL = (slug_country, status, type) => {
     }
     return URL + type + "/country/" + slug_country + "/status/" + status;
 }
-const default_country = slug_country => URL + 'country/' + slug_country;
+const coords = slog_country => liveUrl + slog_country + '/status/' + 'confirmed';
 const day_one_default = slug_country => dayOneUrl + slug_country;
 const data_from_past_10_weeks = (slog_country, status, date) => liveUrl + slog_country + '/status/' + status + '/date/' + date;
 
@@ -54,17 +54,22 @@ function Covid19API() {
     const Coordinates = (slug_country) => {
         const [json, setJson] = useState([]);
         const getData = async () => {
-            const response = await fetch(default_country(slug_country), application_json);
+            const response = await fetch(coords(slug_country), application_json);
+console.log(coords(slug_country))
             const json = await response.json();
-            setJson(json);
+            setJson([ json[0]["Lat"],json[0]["Lon"] ]);
         };
         useEffect(() => {
             getData()
-        }, [])
-        return [ 
-            json[0].Lat,
-            json[0].Lon
-        ]
+        }, [slug_country])
+
+        if (json.length > 0) {
+            if (json[0] === undefined) {
+                return ["18.35", "-64.93"]
+            }
+            return json
+        }
+        return ["18.35", "-64.93"]
 
     }
     const Chart = ( country, status ) => {
@@ -86,6 +91,7 @@ function Covid19API() {
         function ReturnArrays() {
         let objArr = []
 
+            //FIXME check for array length is not = 0
             json.forEach(item =>{
                 let checkBool = false;
                 objArr.forEach (o => {
