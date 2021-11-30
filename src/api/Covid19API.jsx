@@ -74,8 +74,6 @@ function Covid19API() {
         const [json, setJson] = useState([]);
         let _country = "south-africa";
         let _status = "Confirmed";
-        console.log(status)
-        console.log(country)
 
         if (country) { _country = country; }
         if (status) { _status = status; }
@@ -85,35 +83,47 @@ function Covid19API() {
             const json = await response.json();
             setJson(json);
         };
-        async function ReturnArrays() {
-            const startArr = json;
-            console.log(startArr)
-            let array = [];
+        function ReturnArrays() {
+        let objArr = []
+
+            json.forEach(item =>{
+                let checkBool = false;
+                objArr.forEach (o => {
+                    if(o.date === item["Date"]){
+                        checkBool = true;
+                        o.number += item[status];
+                    }
+                });
+
+                if(!checkBool){
+                    objArr.push({
+                        date: item["Date"],
+                        number: item[status]
+                    });
+                }
+            });
+
+            const startArr = objArr;
+            const array = [];
             let combined = 0
             for (let index = 0; index < startArr.length; index++) {
-                // console.log(combined);
-                // console.log(((index != 0)))
-                if (!(index ===  0) && index % 7 === 0) {
-                    array = [...array, combined]
-                    console.log(combined);
+                combined += startArr[index].number;
+                if ((index + 1) % 7 === 0) {
+                    array.push(combined);
                     combined = 0;
                 };
-                console.log(startArr[index][status])
-                combined += startArr[index][status];
             };
+
             return array;
+
         };
-        async function getDataAndReturnArrays() {
-            await GetData();
-            await ReturnArrays();
-        }
 
         useEffect(() => {
-             getDataAndReturnArrays()
+            GetData();
         }, [])
-        return (
-            [-1]
-        )
+
+        return ReturnArrays();
+        
 
     }
     const Status = (slug_country, status, type) => {

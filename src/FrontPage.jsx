@@ -26,11 +26,11 @@ export default function FrontPage() {
         setState({ ...state, [name]: value });
     }
 
-    const handleSubmit = event => {
-        event.preventDefault();
-        if (state.slug_country === "none") return console.log("-1");
-        console.log(CovidApi.Status(state.slug_country, state.status, state.type));
-    }
+    // const handleSubmit = event => {
+    //     event.preventDefault();
+    //     if (state.slug_country === "none") return console.log("-1");
+    //     console.log(CovidApi.Status(state.slug_country, state.status, state.type));
+    // }
     return (
         
         <div>
@@ -38,7 +38,7 @@ export default function FrontPage() {
             <h1 id="header">Worldwide COVID-19 cases</h1>
 
             <div className="container">
-                <form className = "float-container" onSubmit={handleSubmit}>
+                <form className = "float-container">
                     <div className="float-child">
                         <div className="container" id="box1">
                             <div className="mb-3">
@@ -80,7 +80,8 @@ export default function FrontPage() {
                     </div>
                 </form>
                 <div className="section">
-                    {(state.slug_country === "none") ? <Line country="united-sates"/> : <Line country={state.slug_country}/> }
+                    {console.log(state.slug_country)}
+                    {(state.slug_country === "none") ? <Line country="united-states"/> : <Line country={state.slug_country}/> }
                 </div>
             </div>
         </div>
