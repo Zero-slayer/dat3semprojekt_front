@@ -70,5 +70,5 @@ label.form-label{
 }
 
 .section{
-    margin-top: 40vh;
+    display: inline-block;
 }
