@@ -68,7 +68,7 @@ export default function FrontPage() {
                         <Map country={state.slug_country === "none" ? "united-states" : state.slug_country}/>
                     </div>
                 <div className="section">
-                    <Line country={state.slug_country === "none" ? "united-states" : state.slug_country}/>
+                    <Line total={state.type == "total"} country={state.slug_country === "none" ? "united-states" : state.slug_country}/>
                 </div>
             </div>
         </div>
