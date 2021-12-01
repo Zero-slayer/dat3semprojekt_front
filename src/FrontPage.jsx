@@ -28,12 +28,12 @@ export default function FrontPage() {
     return (
         
         <div>
-            <NavigationBar/>        
             <h1 id="header">Worldwide COVID-19 cases</h1>
 
             <div className="container">
+                <div className="horizontal">
                     <div className="float-child">
-                        <div className="container" id="box1">
+                        <div id="box1">
                             <div className="mb-3">
                                 <label htmlFor="countryInput" className="form-label">Country: </label>
                                 <select id="countryInput" className="form-select" name="slug_country" onChange={handleChange}>
@@ -67,6 +67,7 @@ export default function FrontPage() {
                     <div className="float-child" id="leafletMap">
                         <Map country={state.slug_country === "none" ? "united-states" : state.slug_country}/>
                     </div>
+                </div>
                 <div className="section">
                     <Line total={state.type == "total"} country={state.slug_country === "none" ? "united-states" : state.slug_country}/>
                 </div>

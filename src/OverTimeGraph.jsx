@@ -22,7 +22,7 @@ export default function Line({total, country}) {
             data: confirmedData
         },
         {
-            name: "recovered",
+            name: "Recovered",
             data: recoveredData
         },
         {
