@@ -59,7 +59,7 @@ export default function FrontPage() {
                     </div>
                 </div>
                 <div className="section">
-                    <Line total={state.type == "total"} country={state.slug_country === "none" ? "united-states" : state.slug_country}/>
+                    <Line total={state.type === "total"} country={state.slug_country === "none" ? "united-states" : state.slug_country}/>
                 </div>
             </div>
         </div>
