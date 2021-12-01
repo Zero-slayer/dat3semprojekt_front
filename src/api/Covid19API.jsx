@@ -71,7 +71,11 @@ function Covid19API() {
     }
     const Chart = (total, country, status ) => {
         const DAY_IN_MS = 1000 * 60 * 60 * 24;
-        const date = new Date( new Date() - ((DAY_IN_MS * 7 * (total ? 11 : 10)) + DAY_IN_MS));
+        let weeks = 10;
+        if(total)
+            weeks = 11;
+        console.log(total+" - "+weeks);
+        const date = new Date( new Date() - ((DAY_IN_MS * 7 * weeks) + DAY_IN_MS));
         var tenWeeksAgo = date.getFullYear().toString() + '-' +  ((date.getMonth() + 1)).toString() + '-' + date.getDate().toString() + '';
         const [json, setJson] = useState([]);
         let _country = "south-africa";
@@ -119,8 +123,7 @@ function Covid19API() {
                     combined = 0;
                 };
             };
-
-            if(!total){
+            if(total){
                 let toRemove = array[0];
                 for (let index = 1; index < array.length; index++) {
                     const holder = toRemove;
@@ -129,13 +132,13 @@ function Covid19API() {
                 }
                 array.shift();
             }
-
+            
             return array;
         };
 
         useEffect(() => {
             GetData();
-        }, [country,total])
+        }, [country, total])
 
         return ReturnArrays();
 
