@@ -72,10 +72,10 @@ console.log(coords(slug_country))
         return ["18.35", "-64.93"]
 
     }
-    const Chart = ( country, status ) => {
+    const Chart = (total, country, status ) => {
         const DAY_IN_MS = 1000 * 60 * 60 * 24;
-        const today = new Date( new Date() - ((DAY_IN_MS * 7 * 10) + DAY_IN_MS));
-        var tenWeeksAgo = today.getFullYear().toString() + '-' +  ((today.getMonth() + 1)).toString() + '-' + today.getDate().toString() + '';
+        const date = new Date( new Date() - ((DAY_IN_MS * 7 * (total ? 11 : 10)) + DAY_IN_MS));
+        var tenWeeksAgo = date.getFullYear().toString() + '-' +  ((date.getMonth() + 1)).toString() + '-' + date.getDate().toString() + '';
         const [json, setJson] = useState([]);
         let _country = "south-africa";
         let _status = "Confirmed";
@@ -120,8 +120,17 @@ console.log(coords(slug_country))
                 };
             };
 
-            return array;
+            if(!total){
+                let toRemove = array[0];
+                for (let index = 1; index < array.length; index++) {
+                    const holder = toRemove;
+                    toRemove = array[index];
+                    array[index] -= holder;
+                }
+                array.shift();
+            }
 
+            return array;
         };
 
         useEffect(() => {

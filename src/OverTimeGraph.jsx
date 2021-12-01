@@ -10,12 +10,11 @@ import CovidApi from './api/Covid19API';
 
 
 
-export default function Line({country}) {
-
-    let confirmedData = CovidApi.Chart(country, "Confirmed")
-    let recoveredData = CovidApi.Chart(country, "Recovered")
-    let deathsData = CovidApi.Chart(country, "Deaths")
-    let activeData = CovidApi.Chart(country, "Active")
+export default function Line({total, country}) {
+    let confirmedData = CovidApi.Chart(total, country, "Confirmed")
+    let recoveredData = CovidApi.Chart(total, country, "Recovered")
+    let deathsData = CovidApi.Chart(total, country, "Deaths")
+    let activeData = CovidApi.Chart(total, country, "Active")
 
     const series = [
         {
@@ -50,7 +49,7 @@ export default function Line({country}) {
     ];
     return (
         <Chart>
-            <ChartTitle text="Cases per Week" />
+            <ChartTitle text={total ? "Total Cases per Week":"New Cases per Week"} />
             <ChartCategoryAxis>
                 <ChartCategoryAxisItem
                     title={{
