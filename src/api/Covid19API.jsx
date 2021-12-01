@@ -91,7 +91,6 @@ function Covid19API() {
         const array = [];
         let combined = 0
 
-            //FIXME check for array length is not = 0
             if (json.length <= 0) {
                 return array;
             };
@@ -136,25 +135,9 @@ function Covid19API() {
 
         useEffect(() => {
             GetData();
-        }, [country])
+        }, [country,total])
 
         return ReturnArrays();
-        
-
-    }
-    const Status = (slug_country, status, type) => {
-        const [json, setJson] = useState([]);
-        const getData = async () => {
-            const response = await fetch(type_URL(slug_country, status, type), application_json);
-            const json = await response.json();
-            setJson(json);
-        };
-        useEffect(() => {
-            getData()
-        }, [])
-        return (
-            json
-        )
 
     }
 
@@ -177,9 +160,9 @@ function Covid19API() {
     const Countries = () => {
         const [json, setJson] = useState([]);
         const getData = async () => {
-            const response = await fetch(countriesUrl, application_json);
+            const response = await fetch(summaryUrl, application_json);
             const json = await response.json();
-            setJson(json);
+            setJson(json["Countries"]);
         };
         useEffect(() => {
             getData()
@@ -198,14 +181,14 @@ function Covid19API() {
                 return 0;
             })        )
     }
-        return {
-            Default,
-            Coordinates,
-            Status,
-            Summary,
-            Countries,
-            Chart
-        }
+
+    return {
+        Default,
+        Coordinates,
+        Summary,
+        Countries,
+        Chart
+    }
 
 }
 const api = Covid19API();

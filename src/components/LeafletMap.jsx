@@ -7,12 +7,13 @@ import CovidApi from '../api/Covid19API';
 export default function map({ country }) {
 
     let center = CovidApi.Coordinates(country);
+    const zoomValue = 2;
 
     return (
     
         <div className="map">
-            <MapContainer center={center} zoom={1} scrollWheelZoom={false}>
-                <ChangeView center={center} zoom={1} />
+            <MapContainer center={center} zoom={zoomValue} scrollWheelZoom={false}>
+                <ChangeView center={center} zoom={zoomValue} />
                 <TileLayer
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     attribution='&copy; <a

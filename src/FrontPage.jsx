@@ -13,7 +13,6 @@ export default function FrontPage() {
     const getCountries = CovidApi.Countries();
     const [state, setState] = useState({
         slug_country: "none",
-        status: "none",
         type: "dayone"
     });
 
@@ -45,15 +44,6 @@ export default function FrontPage() {
                             </div>
 
                             <div className="mb-3">
-                                <label htmlFor="filterInput" className="form-label">Status:</label>
-                                <select id="filterInput" className="form-select" name="status" onChange={handleChange}>
-                                    <option defaultValue value="none">None</option>
-                                    <option value="confirmed">Confirmed cases</option>
-                                    <option value="recovered">Recovered cases</option>
-                                    <option value="active">Active cases</option>
-                                    <option value="deaths">Deaths</option>
-                                </select>
-                                <br />
                                 <select id="typeInput" className="form-select filter" name="type" onChange={handleChange}>
                                     <option defaultValue value="dayone">Day one cases</option>
                                     <option value="total">Total cases</option>
@@ -68,7 +58,7 @@ export default function FrontPage() {
                         <Map country={state.slug_country === "none" ? "united-states" : state.slug_country}/>
                     </div>
                 <div className="section">
-                    <Line total={state.type == "total"} country={state.slug_country === "none" ? "united-states" : state.slug_country}/>
+                    <Line total={state.type === "total"} country={state.slug_country === "none" ? "united-states" : state.slug_country}/>
                 </div>
             </div>
         </div>

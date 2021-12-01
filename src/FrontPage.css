@@ -70,5 +70,7 @@ label.form-label{
 }
 
 .section{
+    align-items: center;
     display: inline-block;
+
 }
