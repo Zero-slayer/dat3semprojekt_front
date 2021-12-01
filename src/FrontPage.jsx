@@ -37,8 +37,8 @@ export default function FrontPage() {
                                 <label htmlFor="countryInput" className="form-label">Country: </label>
                                 <select id="countryInput" className="form-select" name="slug_country" onChange={handleChange}>
                                     <option defaultValue="none" value="none" >None</option>
-                                    {(getCountries === undefined) ? (<option value="none">None</option>) : (getCountries.map(country => {
-                                        return <option value={ country.Slug } key={ country.ISO2 }>{ country.Country }</option>
+                                    {(getCountries === undefined) ? (<option value="none">None</option>) : (getCountries.map((country, index) => {
+                                        return <option value={ country.Slug } key={ index }>{ country.Country }</option>
                                     }))}
                                 </select>
                             </div>
