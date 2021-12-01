@@ -55,18 +55,15 @@ function Covid19API() {
         const [json, setJson] = useState([]);
         const getData = async () => {
             const response = await fetch(coords(slug_country), application_json);
-console.log(coords(slug_country))
             const json = await response.json();
-            setJson([ json[0]["Lat"],json[0]["Lon"] ]);
+            setJson(json[0] === undefined ? ["18.35", "-64.93"] :[json[0]["Lat"], json[0]["Lon"]]);
+
         };
         useEffect(() => {
             getData()
         }, [slug_country])
 
         if (json.length > 0) {
-            if (json[0] === undefined) {
-                return ["18.35", "-64.93"]
-            }
             return json
         }
         return ["18.35", "-64.93"]
@@ -90,8 +87,15 @@ console.log(coords(slug_country))
         };
         function ReturnArrays() {
         let objArr = []
+        const startArr = objArr;
+        const array = [];
+        let combined = 0
 
             //FIXME check for array length is not = 0
+            if (json.length <= 0) {
+                return array;
+            };
+
             json.forEach(item =>{
                 let checkBool = false;
                 objArr.forEach (o => {
@@ -109,9 +113,6 @@ console.log(coords(slug_country))
                 }
             });
 
-            const startArr = objArr;
-            const array = [];
-            let combined = 0
             for (let index = 0; index < startArr.length; index++) {
                 combined += startArr[index].number;
                 if ((index + 1) % 7 === 0) {

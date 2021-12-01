@@ -16,7 +16,6 @@ export default function FrontPage() {
         status: "none",
         type: "dayone"
     });
-    const [coords, setCoords] = useState([55.87, 12.87]);
 
     const handleChange = event => {
         const target = event.target;
@@ -26,11 +25,6 @@ export default function FrontPage() {
         setState({ ...state, [name]: value });
     }
 
-    // const handleSubmit = event => {
-    //     event.preventDefault();
-    //     if (state.slug_country === "none") return console.log("-1");
-    //     console.log(CovidApi.Status(state.slug_country, state.status, state.type));
-    // }
     return (
         
         <div>
@@ -38,7 +32,6 @@ export default function FrontPage() {
             <h1 id="header">Worldwide COVID-19 cases</h1>
 
             <div className="container">
-                <form className = "float-container">
                     <div className="float-child">
                         <div className="container" id="box1">
                             <div className="mb-3">
@@ -50,7 +43,7 @@ export default function FrontPage() {
                                     }))}
                                 </select>
                             </div>
-                
+
                             <div className="mb-3">
                                 <label htmlFor="filterInput" className="form-label">Status:</label>
                                 <select id="filterInput" className="form-select" name="status" onChange={handleChange}>
@@ -67,18 +60,13 @@ export default function FrontPage() {
                                     <option value="live">Live cases</option>
                                 </select>
                             </div>
-                        </div>
-                
-                        <div className="container" id="box2">
-                            <button type="submit" className="btn btn-primary">Submit</button>
-                        </div>
 
+                        </div>
                     </div>
                 
                     <div className="float-child" id="leafletMap">
                         <Map country={state.slug_country === "none" ? "united-states" : state.slug_country}/>
                     </div>
-                </form>
                 <div className="section">
                     <Line country={state.slug_country === "none" ? "united-states" : state.slug_country}/>
                 </div>
