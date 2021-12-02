@@ -10,29 +10,15 @@ import CovidApi from './api/Covid19API';
 
 
 
-export default function Line({total, country}) {
-    let confirmedData = CovidApi.Chart(total, country, "Confirmed")
-    let recoveredData = CovidApi.Chart(total, country, "Recovered")
-    let deathsData = CovidApi.Chart(total, country, "Deaths")
-    let activeData = CovidApi.Chart(total, country, "Active")
+export default function Line({total, country, _case}) {
+    let data = CovidApi.Chart(total, country, _case);
+    console.log(country);
 
     const series = [
         {
-            name: "Confirmed",
-            data: confirmedData
-        },
-        {
-            name: "Recovered",
-            data: recoveredData
-        },
-        {
-            name: "Deaths",
-            data: deathsData
-        },
-        {
-            name: "Active",
-            data: activeData
-        },
+            name: _case,
+            data: data
+        }
     ]
 
     const categories = [
@@ -53,7 +39,7 @@ export default function Line({total, country}) {
             <ChartCategoryAxis>
                 <ChartCategoryAxisItem
                     title={{
-                        text: "Days",
+                        text: "Weeks",
                     }}
                     categories={categories}
                 />

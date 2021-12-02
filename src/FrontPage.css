@@ -3,10 +3,22 @@ h1#header {
   text-align: center;
   margin-top: 30px;
 }
-
-label.form-label {
-  color: #ffffff;
-  font-weight: bold;
+#countryInput,
+#filterInput,
+#typeInput {
+  width: 400px;
+}
+#box1 {
+  margin-left: 30px;
+  margin-right: 30px;
+}
+#box2 {
+  display: inline-block;
+  margin-left: 30px;
+  margin-right: 30px;
+}
+#globalStats>p {
+  text-align: left;
 }
 
 .container {
@@ -15,13 +27,6 @@ label.form-label {
   max-width: 1080px;
   height: 100vh;
 }
-
-#countryInput,
-#filterInput,
-#typeInput {
-  width: 400px;
-}
-
 .container::before,
 .container::after {
   content: "";
@@ -33,15 +38,6 @@ label.form-label {
   max-width: 100%;
 }
 
-#box1 {
-  margin-left: 30px;
-  margin-right: 30px;
-}
-#box2 {
-  display: inline-block;
-  margin-left: 30px;
-  margin-right: 30px;
-}
 .leaflet-container {
   border: #fff;
   width: 700px;

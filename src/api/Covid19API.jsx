@@ -36,27 +36,12 @@ const application_json = () => {
 }
 
 function Covid19API() {
-    const Default = (slug_country) => {
-        const [json, setJson] = useState([]);
-        const getData = async () => {
-            const response = await fetch(day_one_default(slug_country), application_json);
-            const json = await response.json();
-            setJson(json);
-        };
-        useEffect(() => {
-            getData()
-        }, [])
-        return (
-            json
-        )
-
-    }
     const Coordinates = (slug_country) => {
         const [json, setJson] = useState([]);
         const getData = async () => {
             const response = await fetch(coords(slug_country), application_json);
             const json = await response.json();
-            setJson(json[0] === undefined ? ["18.35", "-64.93"] :[json[0]["Lat"], json[0]["Lon"]]);
+            setJson(json[0] === undefined ? ["18.35", "-64.93"] : [json[0]["Lat"], json[0]["Lon"]]);
 
         };
         useEffect(() => {
@@ -69,49 +54,49 @@ function Covid19API() {
         return ["18.35", "-64.93"]
 
     }
-    const Chart = (total, country, status ) => {
+    const Chart = (total, country, _case) => {
         const DAY_IN_MS = 1000 * 60 * 60 * 24;
         let weeks = 10;
-        if(total)
+        if (!total)
             weeks = 11;
-        console.log(total+" - "+weeks);
-        const date = new Date( new Date() - ((DAY_IN_MS * 7 * weeks) + DAY_IN_MS));
-        var tenWeeksAgo = date.getFullYear().toString() + '-' +  ((date.getMonth() + 1)).toString() + '-' + date.getDate().toString() + '';
+        console.log(total + " - " + weeks);
+        const date = new Date(new Date() - ((DAY_IN_MS * 7 * weeks) + DAY_IN_MS));
+        var tenWeeksAgo = date.getFullYear().toString() + '-' + ((date.getMonth() + 1)).toString() + '-' + date.getDate().toString() + '';
         const [json, setJson] = useState([]);
         let _country = "south-africa";
         let _status = "Confirmed";
 
         if (country) { _country = country; }
-        if (status) { _status = status; }
+        if (_case) { _status = _case; }
 
         const GetData = async () => {
-            const response = await fetch(data_from_past_10_weeks(_country,_status, tenWeeksAgo), application_json);
+            const response = await fetch(data_from_past_10_weeks(_country, _status, tenWeeksAgo), application_json);
             const json = await response.json();
             setJson(json);
         };
         function ReturnArrays() {
-        let objArr = []
-        const startArr = objArr;
-        const array = [];
-        let combined = 0
+            let objArr = []
+            const startArr = objArr;
+            const array = [];
+            let combined = 0
 
             if (json.length <= 0) {
                 return array;
             };
 
-            json.forEach(item =>{
+            json.forEach(item => {
                 let checkBool = false;
-                objArr.forEach (o => {
-                    if(o.date === item["Date"]){
+                objArr.forEach(o => {
+                    if (o.date === item["Date"]) {
                         checkBool = true;
-                        o.number += item[status];
+                        o.number += item[_case];
                     }
                 });
 
-                if(!checkBool){
+                if (!checkBool) {
                     objArr.push({
                         date: item["Date"],
-                        number: item[status]
+                        number: item[_case]
                     });
                 }
             });
@@ -123,7 +108,7 @@ function Covid19API() {
                     combined = 0;
                 };
             };
-            if(total){
+            if (!total) {
                 let toRemove = array[0];
                 for (let index = 1; index < array.length; index++) {
                     const holder = toRemove;
@@ -138,57 +123,49 @@ function Covid19API() {
 
         useEffect(() => {
             GetData();
-        }, [country, total])
+        }, [country, total, _case])
 
         return ReturnArrays();
 
     }
-
-    const Summary = () => {
-        const [summaryData, setSummaryData] = useState([]);
-        const getData = async () => {
-            const response = await fetch(summaryUrl, application_json);
-            const json = await response.json();
-            return setSummaryData(json["Global"]["TotalConfirmed"]);
-        };
-        useEffect(() => {
-            getData()
-        }, [])
-        return (
-            summaryData
-        )
-
-    }
-
     const Countries = () => {
-        const [json, setJson] = useState([]);
+        const [countryList, setCountryList] = useState([]);
+        const [globalStats, setGlobalStats] = useState([]);
         const getData = async () => {
             const response = await fetch(summaryUrl, application_json);
             const json = await response.json();
-            setJson(json["Countries"]);
+            setCountryList(json["Countries"]);
+            setGlobalStats(json["Global"]);
         };
         useEffect(() => {
             getData()
         }, [])
-        return (
-            json.sort((a, b) => {
-                let fa = a["Country"].toLowerCase(),
-                    fb = b["Country"].toLowerCase();
+        const List = () => {
+            return (
+                countryList.sort((a, b) => {
+                    let fa = a["Country"].toLowerCase(),
+                        fb = b["Country"].toLowerCase();
             
-                if (fa < fb) {
-                    return -1;
-                }
-                if (fa > fb) {
-                    return 1;
-                }
-                return 0;
-            })        )
+                    if (fa < fb) {
+                        return -1;
+                    }
+                    if (fa > fb) {
+                        return 1;
+                    }
+                    return 0;
+                }))
+        }
+        const Stats = () => {
+            return globalStats;
+        }
+        return {
+            List,
+            Stats
+        }
     }
 
     return {
-        Default,
         Coordinates,
-        Summary,
         Countries,
         Chart
     }

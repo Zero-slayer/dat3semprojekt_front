@@ -6,14 +6,16 @@ import CovidApi from './api/Covid19API';
 import Map from './components/LeafletMap';
 import "@progress/kendo-theme-material/dist/all.css";
 import "hammerjs";
-import Line from './OverTimeGraph'
+import Chart from './OverTimeGraph'
 
 
 export default function FrontPage() {
-    const getCountries = CovidApi.Countries();
+    const getCountries = CovidApi.Countries().List();
+    const getGlobalStats = CovidApi.Countries().Stats();
     const [state, setState] = useState({
-        slug_country: "none",
-        type: "dayone"
+        slug_country: "afghanistan",
+        type: "dayone",
+        case: "Active",
     });
 
     const handleChange = event => {
@@ -22,6 +24,25 @@ export default function FrontPage() {
         const name = target.name;
 
         setState({ ...state, [name]: value });
+    }
+    function loadGlobalStats() {
+        if (getGlobalStats === undefined) {
+            return <p>Loading data...</p>
+
+        } else {
+            return (
+                <div id="globalStats">
+                    <h2>Global stats:</h2>
+                    <p>New confirmed: {getGlobalStats["NewConfirmed"]}</p>
+                    <p>Total confirmed: {getGlobalStats["TotalConfirmed"]}</p>
+                    <p>New deaths: {getGlobalStats["NewDeaths"]}</p>
+                    <p>Total deaths: {getGlobalStats["TotalDeaths"]}</p>
+                    <p>New recovered: {getGlobalStats["NewRecovered"]}</p>
+                    <p>Total recovered: {getGlobalStats["TotalRecovered"]}</p>
+                </div>
+            )
+        }
+
     }
 
     return (
@@ -34,9 +55,8 @@ export default function FrontPage() {
                     <div className="float-child">
                         <div id="box1">
                             <div className="mb-3">
-                                <label htmlFor="countryInput" className="form-label">Country: </label>
-                                <select id="countryInput" className="form-select" name="slug_country" onChange={handleChange}>
-                                    <option defaultValue="none" value="none" >None</option>
+                                <h2 htmlFor="countrySelect">Country: </h2>
+                                <select id="countrySelect" className="form-select" name="slug_country" onChange={handleChange}>
                                     {(getCountries === undefined) ? (<option value="none">None</option>) : (getCountries.map((country, index) => {
                                         return <option value={ country.Slug } key={ index }>{ country.Country }</option>
                                     }))}
@@ -44,11 +64,19 @@ export default function FrontPage() {
                             </div>
 
                             <div className="mb-3">
-                                <select id="typeInput" className="form-select filter" name="type" onChange={handleChange}>
-                                    <option defaultValue value="dayone">Day one cases</option>
-                                    <option value="total">Total cases</option>
-                                    <option value="live">Live cases</option>
+                                <select id="typeSelect" className="form-select filter" name="type" onChange={handleChange}>
+                                    <option defaultValue value="dayone">New</option>
+                                    <option value="total">Total</option>
                                 </select>
+                                <select id="caseSelect" className="form-select filter" name="case" onChange={handleChange}>
+                                    <option defaultValue value="Active">Active</option>
+                                    <option value="Confirmed">Confirmed</option>
+                                    <option value="Deaths">Deaths</option>
+                                    <option value="Recovered">Recovered</option>
+                                </select>
+                            </div>
+                            <div>
+                                {loadGlobalStats()}
                             </div>
 
                         </div>
@@ -59,7 +87,7 @@ export default function FrontPage() {
                     </div>
                 </div>
                 <div className="section">
-                    <Line total={state.type === "total"} country={state.slug_country === "none" ? "united-states" : state.slug_country}/>
+                    <Chart total={state.type === "total"} country={state.slug_country === "none" ? "united-states" : state.slug_country} _case={state.case}/>
                 </div>
             </div>
         </div>
