@@ -85,7 +85,11 @@ function Covid19API() {
             });
 
             for (let index = 0; index < startArr.length; index++) {
-                combined += startArr[index].number;
+                if(!total)
+                    combined += startArr[index].number;
+                else if(startArr[index].number > combined)
+                    combined = startArr[index].number;
+                
                 if ((index + 1) % 7 === 0) {
                     array.push(combined);
                     combined = 0;
