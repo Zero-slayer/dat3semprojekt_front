@@ -3,26 +3,9 @@ import { useState, useEffect } from 'react';
 
 const URL = 'https://api.covid19api.com/';
 const summaryUrl = URL + 'summary';
-const countriesUrl = URL + 'countries';
-const dayOneUrl = URL + 'dayone/country/';
-const totalUrl = URL + 'total/' + dayOneUrl;
 const liveUrl = URL + 'live/country/';
-const type_URL = (slug_country, status, type) => {
-    if (status === "none") {
-        return URL + type + "/country/" + slug_country;
-    }
-    return URL + type + "/country/" + slug_country + "/status/" + status;
-}
 const coords = slog_country => liveUrl + slog_country + '/status/' + 'confirmed';
-const day_one_default = slug_country => dayOneUrl + slug_country;
 const data_from_past_10_weeks = (slog_country, status, date) => liveUrl + slog_country + '/status/' + status + '/date/' + date;
-
-function handleHttpErrors(response) {
-    if (!response.ok) {
-        return Promise.reject({ status: response.status, fullError: response.json() })
-    }
-    return response.json();
-}
 
 const application_json = () => {
     var ops = {
