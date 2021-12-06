@@ -3,10 +3,15 @@ h1#header {
   text-align: center;
   margin-top: 30px;
 }
-#countryInput,
-#filterInput,
-#typeInput {
-  width: 400px;
+h2#header {
+  font-weight: bold;
+  text-align: left;
+  margin-top: -35px;
+}
+#countrySelect,
+#typeSelect,
+#caseSelect {
+  width: 300px;
 }
 #box1 {
   margin-left: 30px;
@@ -67,4 +72,16 @@ h1#header {
 
 .section {
   padding: 20px;
+}
+
+.mobile_view>.section {
+  padding: 0%;
+  position: absolute;
+  margin-left: -35px;
+  margin-top: -35px;
+  transform: scale(0.80);
+}
+.mobile_stats,.mobile_h2 {
+  text-align: left;
+  padding-top: 5px;
 }

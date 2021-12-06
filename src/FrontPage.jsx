@@ -37,8 +37,6 @@ export default function FrontPage() {
                     <p>Total confirmed: {getGlobalStats["TotalConfirmed"]}</p>
                     <p>New deaths: {getGlobalStats["NewDeaths"]}</p>
                     <p>Total deaths: {getGlobalStats["TotalDeaths"]}</p>
-                    <p>New recovered: {getGlobalStats["NewRecovered"]}</p>
-                    <p>Total recovered: {getGlobalStats["TotalRecovered"]}</p>
                 </div>
             )
         }
@@ -48,9 +46,9 @@ export default function FrontPage() {
     return (
         
         <div>
-            <h1 id="header">Worldwide COVID-19 cases</h1>
 
-            <div className="container">
+            <div className="container d-none d-lg-block normal_view">
+                <h1 id="header">Worldwide COVID-19 cases</h1>
                 <div className="horizontal">
                     <div className="float-child">
                         <div id="box1">
@@ -85,6 +83,35 @@ export default function FrontPage() {
                     <div className="float-child" id="leafletMap">
                         <Map country={state.slug_country === "none" ? "united-states" : state.slug_country}/>
                     </div>
+                </div>
+                <div className="section">
+                    <Chart total={state.type === "total"} country={state.slug_country === "none" ? "united-states" : state.slug_country} _case={state.case}/>
+                </div>
+            </div>
+            <div className="container d-lg-none mobile_view">
+                <h2 id="header">Worldwide COVID-19 cases</h2>
+                <div className="mobile_stats">
+                    {loadGlobalStats()}
+                </div>
+                <div className="mb-3">
+                    <h2 htmlFor="countrySelect" className="mobile_h2">Country: </h2>
+                    <select id="countrySelect" className="form-select" name="slug_country" onChange={handleChange}>
+                        {(getCountries === undefined) ? (<option value="none">None</option>) : (getCountries.map((country, index) => {
+                            return <option value={ country.Slug } key={ index }>{ country.Country }</option>
+                        }))}
+                    </select>
+                </div>
+                <div className="mb-3">
+                    <select id="typeSelect" className="form-select filter" name="type" onChange={handleChange}>
+                        <option defaultValue value="dayone">New</option>
+                        <option value="total">Total</option>
+                    </select>
+                    <select id="caseSelect" className="form-select filter" name="case" onChange={handleChange}>
+                        <option defaultValue value="Active">Active</option>
+                        <option value="Confirmed">Confirmed</option>
+                        <option value="Deaths">Deaths</option>
+                        <option value="Recovered">Recovered</option>
+                    </select>
                 </div>
                 <div className="section">
                     <Chart total={state.type === "total"} country={state.slug_country === "none" ? "united-states" : state.slug_country} _case={state.case}/>

@@ -7,15 +7,9 @@ import NavigationBar from './components/NavigationBar';
 
 function App() {
   return (
-    <Router>
       <div className="App">
-        <NavigationBar/>
-        <Routes>
-          <Route path="/" exact element ={<FrontPage/>}/>
-          <Route path="/about" exact element ={<About/>}/>
-        </Routes>
+      <FrontPage />
       </div>
-    </Router>
   )
 
 }
