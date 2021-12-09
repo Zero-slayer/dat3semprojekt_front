@@ -81,6 +81,9 @@ export default function FrontPage() {
                             <div>
                                 {loadGlobalStats()}
                             </div>
+                            <div className="weather_container">
+                                {loadWeatherImg(state.slug_country)}
+                            </div>
                         </div>
                     </div>
                 
@@ -90,10 +93,6 @@ export default function FrontPage() {
                 </div>
                 <div className="section">
                     <Chart total={state.type === "total"} country={state.slug_country === "none" ? "united-states" : state.slug_country} _case={state.case}/>
-                </div>
-                <br></br>
-                <div className="weathercontainer">
-                    {loadWeatherImg(state.slug_country)}
                 </div>
             </div>
 
@@ -122,7 +121,7 @@ export default function FrontPage() {
                         <option value="Recovered">Recovered</option>
                     </select>
                 </div>
-                <div className="weathercontainer">
+                <div className="weather_container">
                     {loadWeatherImg(state.slug_country)}
                 </div>
                 <div className="section">

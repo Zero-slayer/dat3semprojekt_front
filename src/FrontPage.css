@@ -45,6 +45,7 @@ h2#header {
 
 .leaflet-container {
   border: #fff;
+  border-radius: 8px;
   width: 700px;
   height: 500px;
   margin-left: auto;
@@ -72,7 +73,6 @@ h2#header {
 
 .section {
   padding: 20px;
-  
 }
 
 .mobile_view>.section {
@@ -91,13 +91,15 @@ h2#header {
   max-height: 550px;
 }
 
-.weathercontainer{
-  width: 1050px;
-  padding: 20px;
+.normal_view .weather_container img{
+  margin-left: -25px;
+  border-radius: 8px;
+  width: 100%;
 }
 
-.mobile_view>.weathercontainer{
-  width: 1050px;
-  max-width: 50%;
-  padding-left: 0%;
+.mobile_view .weather_container img{
+  border-radius: 8px;
+  margin-left: -490px;
+  margin-bottom: 5px;
+  width: 55%;
 }
