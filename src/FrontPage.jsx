@@ -128,8 +128,8 @@ export default function FrontPage() {
                 <div className="section">
                     <Chart total={state.type === "total"} country={state.slug_country === "none" ? "united-states" : state.slug_country} _case={state.case}/>
                 </div>
-                <div className="section">
-                    <BarChart/>
+                <div className="float-child" id="leafletMap">
+                    <Map country={state.slug_country === "none" ? "united-states" : state.slug_country}/>
                 </div>
             </div>
         </div>
