@@ -1,9 +1,10 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 
-const URL = 'https://api.covid19api.com/';
-const summaryUrl = URL + 'summary';
-const liveUrl = URL + 'live/country/';
+const apiURL = 'https://api.covid19api.com/';
+const summaryUrl = apiURL + 'summary';
+const liveUrl = apiURL + 'live/country/';
+const weatherURL = (lon,lat) => "http://www.7timer.info/bin/astro.php?lon=" + lon + "&lat=" + lat + "&ac=0&lang=en&unit=metric&output=internal&tzshift=0";
 const coords = slog_country => liveUrl + slog_country + '/status/' + 'confirmed';
 const data_from_past_10_weeks = (slog_country, status, date) => liveUrl + slog_country + '/status/' + status + '/date/' + date;
 
@@ -149,11 +150,35 @@ function Covid19API() {
             Stats
         }
     }
+    const Weather = (lon, lat) => {
+        console.log(lon + " lon : lat " + lat);
+        console.log(weatherURL(lon,lat));
+        const [img, setImg] = useState([]);
+        const getImage = async () => {
+            const response = await fetch(weatherURL(lon,lat));
+            const img = await response.blob();
+            const imgObject = URL.createObjectURL(img);
+            console.log(img);
+            setImg(imgObject);
+
+        };
+        useEffect(() => {
+            getImage()
+        }, [lon,lat])
+
+        return (
+            <div>
+                <img src={img} alt="icons" />
+            </div>
+        );
+
+    }
 
     return {
         Coordinates,
         Countries,
-        Chart
+        Chart,
+        Weather
     }
 
 }

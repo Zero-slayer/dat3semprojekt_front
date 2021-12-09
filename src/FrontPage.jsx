@@ -43,6 +43,11 @@ export default function FrontPage() {
         }
 
     }
+    function loadWeatherImg(slug_country) {
+        let coords = CovidApi.Coordinates(slug_country);
+        let image = CovidApi.Weather(coords[1], coords[0]);
+        return image;
+    }
 
     return (
         
@@ -75,6 +80,9 @@ export default function FrontPage() {
                             </div>
                             <div>
                                 {loadGlobalStats()}
+                            </div>
+                            <div>
+                                {loadWeatherImg(state.slug_country)}
                             </div>
 
                         </div>
