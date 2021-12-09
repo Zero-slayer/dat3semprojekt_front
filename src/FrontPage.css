@@ -90,3 +90,8 @@ h2#header {
   background: white;
   max-height: 550px;
 }
+
+.weathercontainer{
+  width: 1050px;
+  padding: 20px;
+}

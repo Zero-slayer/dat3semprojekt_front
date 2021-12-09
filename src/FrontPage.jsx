@@ -81,10 +81,6 @@ export default function FrontPage() {
                             <div>
                                 {loadGlobalStats()}
                             </div>
-                            <div>
-                                {loadWeatherImg(state.slug_country)}
-                            </div>
-
                         </div>
                     </div>
                 
@@ -95,8 +91,9 @@ export default function FrontPage() {
                 <div className="section">
                     <Chart total={state.type === "total"} country={state.slug_country === "none" ? "united-states" : state.slug_country} _case={state.case}/>
                 </div>
-                <div className="section">
-                    <BarChart/>
+                <br></br>
+                <div className="weathercontainer">
+                    {loadWeatherImg(state.slug_country)}
                 </div>
             </div>
 
