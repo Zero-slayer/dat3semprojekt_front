@@ -95,3 +95,9 @@ h2#header {
   width: 1050px;
   padding: 20px;
 }
+
+.mobile_view>.weathercontainer{
+  width: 1050px;
+  max-width: 50%;
+  padding-left: 0%;
+}

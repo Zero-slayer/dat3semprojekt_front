@@ -122,6 +122,9 @@ export default function FrontPage() {
                         <option value="Recovered">Recovered</option>
                     </select>
                 </div>
+                <div className="weathercontainer">
+                    {loadWeatherImg(state.slug_country)}
+                </div>
                 <div className="section">
                     <Chart total={state.type === "total"} country={state.slug_country === "none" ? "united-states" : state.slug_country} _case={state.case}/>
                 </div>
