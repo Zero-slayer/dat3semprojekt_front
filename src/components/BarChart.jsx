@@ -1,32 +1,26 @@
-import React from "react";
-import {Bar} from "react-chartjs-2";
+import React from 'react';
 import {
-    Chart as ChartJS,
-    CategoryScale,
-    LinearScale,
-    BarElement,
-    Title,
-    Tooltip,
-    Legend,
-  } from 'chart.js';
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+} from 'chart.js';
+import { Bar } from 'react-chartjs-2';
 
 ChartJS.register(
-    CategoryScale,
-    LinearScale,
-    BarElement,
-    Title,
-    Tooltip,
-    Legend
-  );
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend
+);
 
 export const options = {
-    responsive: true,
-    plugins: {
-        title: {
-            display: true,
-            text: 'Chart.js Bar Chart'
-        }
-    }
+  responsive: true,
 }
 
 export default function BarChart(){
@@ -43,5 +37,5 @@ export default function BarChart(){
         ]
     }
 
-    return <Bar options={options} data={data}/>;
+    return <Bar options={options} data={data} style={{background: "white"}}/>;
 }

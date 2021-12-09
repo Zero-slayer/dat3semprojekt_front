@@ -87,7 +87,7 @@ export default function FrontPage() {
                 <div className="section">
                     <Chart total={state.type === "total"} country={state.slug_country === "none" ? "united-states" : state.slug_country} _case={state.case}/>
                 </div>
-                <div className="container barChart">
+                <div className="section">
                     <BarChart/>
                 </div>
             </div>
@@ -120,7 +120,7 @@ export default function FrontPage() {
                 <div className="section">
                     <Chart total={state.type === "total"} country={state.slug_country === "none" ? "united-states" : state.slug_country} _case={state.case}/>
                 </div>
-                <div className="container">
+                <div className="section">
                     <BarChart/>
                 </div>
             </div>

@@ -72,14 +72,14 @@ h2#header {
 
 .section {
   padding: 20px;
+  
 }
 
 .mobile_view>.section {
-  padding: 0%;
-  position: absolute;
-  margin-left: -35px;
-  margin-top: -35px;
-  transform: scale(0.80);
+  padding-top: 5px;
+  padding-left: 0%;
+  position:relative;
+  max-width: 55%;
 }
 .mobile_stats,.mobile_h2 {
   text-align: left;
@@ -87,7 +87,6 @@ h2#header {
 }
 
 .barChart{
-  margin-top: 35px;
   background: white;
   max-height: 550px;
 }
