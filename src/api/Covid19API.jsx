@@ -42,7 +42,6 @@ function Covid19API() {
         let weeks = 10;
         if (!total)
             weeks = 11;
-        console.log(total + " - " + weeks);
         const date = new Date(new Date() - ((DAY_IN_MS * 7 * weeks) + DAY_IN_MS));
         var tenWeeksAgo = date.getFullYear().toString() + '-' + ((date.getMonth() + 1)).toString() + '-' + date.getDate().toString() + '';
         const [json, setJson] = useState([]);

@@ -7,6 +7,7 @@ import Map from './components/LeafletMap';
 import "@progress/kendo-theme-material/dist/all.css";
 import "hammerjs";
 import Chart from './OverTimeGraph'
+import BarChart from './components/BarChart';
 
 
 export default function FrontPage() {
@@ -46,7 +47,6 @@ export default function FrontPage() {
     return (
         
         <div>
-
             <div className="container d-none d-lg-block normal_view">
                 <h1 id="header">Worldwide COVID-19 cases</h1>
                 <div className="horizontal">
@@ -87,7 +87,11 @@ export default function FrontPage() {
                 <div className="section">
                     <Chart total={state.type === "total"} country={state.slug_country === "none" ? "united-states" : state.slug_country} _case={state.case}/>
                 </div>
+                <div className="container barChart">
+                    <BarChart/>
+                </div>
             </div>
+
             <div className="container d-lg-none mobile_view">
                 <h2 id="header">Worldwide COVID-19 cases</h2>
                 <div className="mobile_stats">
@@ -115,6 +119,9 @@ export default function FrontPage() {
                 </div>
                 <div className="section">
                     <Chart total={state.type === "total"} country={state.slug_country === "none" ? "united-states" : state.slug_country} _case={state.case}/>
+                </div>
+                <div className="container">
+                    <BarChart/>
                 </div>
             </div>
         </div>

@@ -12,7 +12,6 @@ import CovidApi from './api/Covid19API';
 
 export default function Line({total, country, _case}) {
     let data = CovidApi.Chart(total, country, _case);
-    console.log(country);
 
     const series = [
         {

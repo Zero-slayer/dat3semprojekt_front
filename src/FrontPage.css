@@ -85,3 +85,9 @@ h2#header {
   text-align: left;
   padding-top: 5px;
 }
+
+.barChart{
+  margin-top: 35px;
+  background: white;
+  max-height: 550px;
+}
